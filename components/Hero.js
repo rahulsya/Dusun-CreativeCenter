@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import Counter from "./Counter";
 
@@ -18,10 +19,7 @@ const Hero = () => {
               <h1>
                 <b>Roy C. Jones</b> web designer
               </h1>
-              <p>
-                We denounce with righteous indignation dislike demoralized by
-                the charms of pleasure
-              </p>
+              <p>We denounce with righteous indignation dislike demoralized by the charms of pleasure</p>
               <div className="hero-btns">
                 <Link legacyBehavior href="/contact">
                   <a className="theme-btn">
@@ -51,10 +49,7 @@ const Hero = () => {
               <div className="bg-circle" />
               <img src="assets/images/hero/me.png" alt="Author" />
               <div className="progress-shape">
-                <img
-                  src="assets/images/hero/progress-shape.png"
-                  alt="Progress"
-                />
+                <img src="assets/images/hero/progress-shape.png" alt="Progress" />
               </div>
             </div>
           </div>
@@ -116,6 +111,30 @@ export const Hero2 = () => {
         <span />
         <span />
         <span />
+      </div>
+    </div>
+  );
+};
+
+export const Hero3 = () => {
+  return (
+    <div className="main-hero-area pb-80 rel z-1 hero-3-main">
+      <video className="vid-content" data-testid="backdrop-background" autoPlay muted loop playsInline>
+        <source
+          src="https://cmsassets.rgpub.io/sanity/files/dsfx7636/news/409ab2fc369ba5e1fe50bac10c6676d7d1365a9f.mp4"
+          type="video/mp4"
+        />
+      </video>
+      <div className="container" style={{ position: "relative", height: "100vh" }}>
+        <div className="d-flex h-100 text-center flex-column align-items-center justify-content-center">
+          <div>
+            <h1>Dusun Creative Centers</h1>
+            <div>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore earum magni fuga facilis, ducimus
+              assumenda rem architecto provident veniam, accusantium nisi.
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

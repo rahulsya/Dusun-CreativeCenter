@@ -37,15 +37,11 @@ const Header1 = ({ onePageMenu }) => {
           <div className="header-inner rel d-flex align-items-center">
             <div className="logo-outer">
               <div className="logo">
-                <Link legacyBehavior href="/">
+                {/* <Link legacyBehavior href="/">
                   <a>
-                    <img
-                      src="assets/images/logos/logo.png"
-                      alt="Logo"
-                      title="Logo"
-                    />
+                    <img src="assets/images/logos/logo.png" alt="Logo" title="Logo" />
                   </a>
-                </Link>
+                </Link> */}
               </div>
             </div>
             <div className="nav-outer clearfix mx-auto">
@@ -55,11 +51,7 @@ const Header1 = ({ onePageMenu }) => {
                   <div className="mobile-logo my-15">
                     <Link legacyBehavior href="/">
                       <a>
-                        <img
-                          src="assets/images/logos/logo.png"
-                          alt="Logo"
-                          title="Logo"
-                        />
+                        <img src="assets/images/logos/logo.png" alt="Logo" title="Logo" />
                       </a>
                     </Link>
                   </div>
@@ -76,11 +68,7 @@ const Header1 = ({ onePageMenu }) => {
                     <span className="icon-bar" />
                   </button>
                 </div>
-                <div
-                  className={`navbar-collapse collapse clearfix ${
-                    toggle ? "show" : ""
-                  }`}
-                >
+                <div className={`navbar-collapse collapse clearfix ${toggle ? "show" : ""}`}>
                   {onePageMenu ? <OnePageMenu /> : <MultiMenu />}
                 </div>
               </nav>
@@ -91,10 +79,7 @@ const Header1 = ({ onePageMenu }) => {
               {/* menu sidbar */}
               <div className="menu-sidebar">
                 <button onClick={() => toggleSidebar()}>
-                  <img
-                    src="assets/images/shape/sidebar-tottler.svg"
-                    alt="Toggler"
-                  />
+                  <img src="assets/images/shape/sidebar-tottler.svg" alt="Toggler" />
                 </button>
               </div>
             </div>
@@ -126,13 +111,10 @@ const Header2 = ({ onePageMenu }) => {
             <div className="logo-outer">
               <div className="logo">
                 <Link legacyBehavior href="/">
-                  <a>
-                    <img
-                      src="assets/images/logos/logo.png"
-                      alt="Logo"
-                      title="Logo"
-                    />
-                  </a>
+                  <h3>DUSUN</h3>
+                  {/* <a>
+                    <img src="assets/images/logos/logo.png" alt="Logo" title="Logo" />
+                  </a> */}
                 </Link>
               </div>
             </div>
@@ -143,11 +125,7 @@ const Header2 = ({ onePageMenu }) => {
                   <div className="mobile-logo my-15">
                     <Link legacyBehavior href="/">
                       <a>
-                        <img
-                          src="assets/images/logos/logo.png"
-                          alt="Logo"
-                          title="Logo"
-                        />
+                        <img src="assets/images/logos/logo.png" alt="Logo" title="Logo" />
                       </a>
                     </Link>
                   </div>
@@ -164,11 +142,7 @@ const Header2 = ({ onePageMenu }) => {
                     <span className="icon-bar" />
                   </button>
                 </div>
-                <div
-                  className={`navbar-collapse collapse clearfix ${
-                    toggle ? "show" : ""
-                  }`}
-                >
+                <div className={`navbar-collapse collapse clearfix ${toggle ? "show" : ""}`}>
                   {onePageMenu ? (
                     <ul className="navigation onepage clearfix">
                       <li>
@@ -208,10 +182,7 @@ const Header2 = ({ onePageMenu }) => {
               {/* menu sidbar */}
               <div className="menu-sidebar d-none d-lg-block">
                 <button onClick={() => toggleSidebar()}>
-                  <img
-                    src="assets/images/shape/sidebar-tottler-white.svg"
-                    alt="Toggler"
-                  />
+                  <img src="assets/images/shape/sidebar-tottler-white.svg" alt="Toggler" />
                 </button>
               </div>
               <Link legacyBehavior href="contact">

@@ -2,7 +2,7 @@ import { About2 } from "@/components/About";
 import { Blog2 } from "@/components/Blog";
 import { Clients2 } from "@/components/Clients";
 import { Contact2 } from "@/components/Contact";
-import { Hero2 } from "@/components/Hero";
+import Hero, { Hero2, Hero3 } from "@/components/Hero";
 import LetsTalk from "@/components/LetsTalk";
 import { Pricing2 } from "@/components/Pricing";
 import { Projects2 } from "@/components/Projects";
@@ -21,133 +21,11 @@ const Index2 = () => {
     <NoxfolioLayout header={2} footer={2}>
       {/*End Hidden Sidebar */}
       {/* Hero Section Start */}
-      <Hero2 />
+      <Hero3 />
       {/* Hero Section End */}
       {/* About Area start */}
       <About2 />
       {/* About Area end */}
-      {/* Headline area start */}
-      <div className="headline-area-h2 rel z-2 py-25">
-        <div className="headline-wrap">
-          <span className="marquee-wrap">
-            <span className="marquee-inner left">
-              <span className="marquee-item">
-                branding
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                product design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                digital marketing
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                product design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                art direction
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                development
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                UI/UX Design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                motion graphics
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                strategy
-                <i className="far fa-asterisk" />
-              </span>
-            </span>
-            <span className="marquee-inner left">
-              <span className="marquee-item">
-                branding
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                product design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                digital marketing
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                product design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                art direction
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                development
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                UI/UX Design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                motion graphics
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                strategy
-                <i className="far fa-asterisk" />
-              </span>
-            </span>
-            <span className="marquee-inner left">
-              <span className="marquee-item">
-                branding
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                product design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                digital marketing
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                product design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                art direction
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                development
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                UI/UX Design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                motion graphics
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                strategy
-                <i className="far fa-asterisk" />
-              </span>
-            </span>
-          </span>
-        </div>
-      </div>
-      {/* Headline Area end */}
       {/* Resume Area start */}
       <Resume2 />
       {/* Resume Area end */}
@@ -157,128 +35,6 @@ const Index2 = () => {
       {/* Skill Area start */}
       <Skill2 />
       {/* Skill Area end */}
-      {/* Headline area start */}
-      <div className="headline-area rel z-2 py-25">
-        <div className="headline-wrap">
-          <span className="marquee-wrap">
-            <span className="marquee-inner left">
-              <span className="marquee-item">
-                branding
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                product design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                digital marketing
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                product design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                art direction
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                development
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                UI/UX Design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                motion graphics
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                strategy
-                <i className="far fa-asterisk" />
-              </span>
-            </span>
-            <span className="marquee-inner left">
-              <span className="marquee-item">
-                branding
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                product design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                digital marketing
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                product design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                art direction
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                development
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                UI/UX Design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                motion graphics
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                strategy
-                <i className="far fa-asterisk" />
-              </span>
-            </span>
-            <span className="marquee-inner left">
-              <span className="marquee-item">
-                branding
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                product design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                digital marketing
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                product design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                art direction
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                development
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                UI/UX Design
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                motion graphics
-                <i className="far fa-asterisk" />
-              </span>
-              <span className="marquee-item">
-                strategy
-                <i className="far fa-asterisk" />
-              </span>
-            </span>
-          </span>
-        </div>
-      </div>
-      {/* Headline Area end */}
       {/* Projects Area start */}
       <Projects2 />
       {/* Projects Area end */}
@@ -375,20 +131,17 @@ const Index2 = () => {
           <span className="marquee-wrap style-two pb-20">
             <span className="marquee-inner left">
               <span className="marquee-item">
-                <span> _ Designer _</span> Portfolio <span>_ Developer _ </span>{" "}
-                Portfolio{" "}
+                <span> _ Designer _</span> Portfolio <span>_ Developer _ </span> Portfolio{" "}
               </span>
             </span>
             <span className="marquee-inner left">
               <span className="marquee-item">
-                <span> _ Designer _</span> Portfolio <span>_ Developer _ </span>{" "}
-                Portfolio{" "}
+                <span> _ Designer _</span> Portfolio <span>_ Developer _ </span> Portfolio{" "}
               </span>
             </span>
             <span className="marquee-inner left">
               <span className="marquee-item">
-                <span> _ Designer _</span> Portfolio <span>_ Developer _ </span>{" "}
-                Portfolio{" "}
+                <span> _ Designer _</span> Portfolio <span>_ Developer _ </span> Portfolio{" "}
               </span>
             </span>
           </span>

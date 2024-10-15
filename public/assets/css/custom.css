@@ -1,0 +1,16 @@
+.hero-3-main {
+  /* background: url("../images/bg-1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh; */
+  /* background-position: center; */
+}
+
+.vid-content {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

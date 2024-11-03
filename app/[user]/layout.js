@@ -1,7 +1,8 @@
+import { AuthContextProvider } from "@/context/authContext";
 import React from "react";
 
 function UserLayout({ children }) {
-  return <div>{children}</div>;
+  return <AuthContextProvider>{children}</AuthContextProvider>;
 }
 
 export default UserLayout;

@@ -13,7 +13,7 @@ import { EnvelopeOpenIcon } from "@radix-ui/react-icons";
 
 function Profile() {
   return (
-    <div className="w-[100%] flex flex-col items-center border-2 border-black min-h-[83vh]">
+    <div className="w-[100%] flex flex-col items-center min-h-[83vh]">
       <h1 className="text-xl text-black md:text-3xl">Profile</h1>
       <Card className="w-[50%] mt-4 flex flex-col items-center text-justify rounded-2xl">
         <CardHeader className="w-[100%] flex flex-col items-center">
@@ -22,6 +22,7 @@ function Profile() {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <CardTitle className="text-black">John Doe</CardTitle>
+          <CardDescription className="text-black">Admin</CardDescription>
           <CardDescription>
             {" "}
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut
@@ -37,9 +38,7 @@ function Profile() {
             <EnvelopeOpenIcon /> Example@mail.com
           </Button>
         </CardContent>
-        <CardFooter>
-          <p>Admin</p>
-        </CardFooter>
+        <CardFooter></CardFooter>
       </Card>
     </div>
   );

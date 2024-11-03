@@ -6,7 +6,6 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
@@ -17,7 +16,7 @@ import {
 } from "@/components/ui/sidebar";
 import { AuthContextProvider, useAuthContext } from "@/context/authContext";
 import Preloader from "@/layout/Preloader";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useParams } from "next/navigation";
 import { useEffect } from "react";
 
 export default function AdminLayout({ children }) {
@@ -44,6 +43,21 @@ export default function AdminLayout({ children }) {
     return <div>Please Login first...</div>;
   }
 
+  const pathSegments = pathname.split("/").filter(Boolean);
+  const breadcrumbSegments = pathSegments.slice(2);
+
+  const breadcrumbItems = breadcrumbSegments.map((segment, index) => {
+    const href = `/${pathSegments.slice(0, index + 3).join("/")}`;
+    const displayText = segment.charAt(0).toUpperCase() + segment.slice(1);
+
+    return (
+      <BreadcrumbItem key={href}>
+        <BreadcrumbLink href={href}>{displayText}</BreadcrumbLink>
+        {index < breadcrumbSegments.length - 1 && <BreadcrumbSeparator />}
+      </BreadcrumbItem>
+    );
+  });
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -53,17 +67,7 @@ export default function AdminLayout({ children }) {
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Building Your Application
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
+              <BreadcrumbList>{breadcrumbItems}</BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>

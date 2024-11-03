@@ -87,7 +87,7 @@ export default function ProjectDetails() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="w-1/2">
       <Button
         onClick={() => router.push(`/${user}/admin/projects`)}
         variant="outline"
@@ -95,7 +95,7 @@ export default function ProjectDetails() {
       >
         Back to Projects
       </Button>
-      <Card>
+      <Card className="shadow-none">
         <CardHeader>
           <CardTitle className="text-3xl font-bold text-slate-900">
             {project.title || "Untitled Project"}
@@ -120,7 +120,7 @@ export default function ProjectDetails() {
             <Separator />
             <div>
               <h3 className="text-lg font-semibold text-slate-900">
-                Technologies
+                Categories
               </h3>
               <div className="flex flex-wrap gap-2">
                 {project.technologies && project.technologies.length > 0 ? (
@@ -130,7 +130,7 @@ export default function ProjectDetails() {
                     </Badge>
                   ))
                 ) : (
-                  <p>No technologies specified</p>
+                  <p>No categories specified</p>
                 )}
               </div>
             </div>
@@ -174,14 +174,18 @@ export default function ProjectDetails() {
                     <h3 className="text-lg font-semibold text-slate-900">
                       Gallery
                     </h3>
-                    <div className="grid grid-cols-2 gap-4 mt-2">
+                    <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
                       {project.gallery_images.map((image, index) => (
-                        <img
+                        <div
                           key={index}
-                          src={image}
-                          alt={`Project image ${index + 1}`}
-                          className="rounded-md"
-                        />
+                          className="h-32 overflow-hidden rounded-lg"
+                        >
+                          <img
+                            src={image}
+                            alt={`Project image ${index + 1}`}
+                            className="h-full w-full object-cover rounded-lg"
+                          />
+                        </div>
                       ))}
                     </div>
                   </div>

@@ -6,11 +6,59 @@ import {
   Timestamp,
   getDoc,
 } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { db, storage } from "@/firebase/config";
+import { db } from "@/firebase/config";
 import { getAuth } from "firebase/auth";
+import { supabase } from "@/lib/supabase/config";
 
 export const projectServices = {
+  async uploadImage(file) {
+    try {
+      if (!file) {
+        throw new Error("No file provided");
+      }
+
+      const fileName = `${Date.now()}-${file.name}`;
+      const filePath = `project-images/${fileName}`;
+
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from("projects")
+        .upload(filePath, file, {
+          cacheControl: "3600",
+          upsert: false,
+        });
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      const {
+        data: { publicUrl },
+      } = supabase.storage.from("projects").getPublicUrl(filePath);
+
+      if (!publicUrl) {
+        throw new Error("Failed to get public URL");
+      }
+
+      try {
+        const response = await fetch(publicUrl, { method: "HEAD" });
+        if (!response.ok) {
+          throw new Error(`URL not accessible: ${response.status}`);
+        }
+      } catch (error) {
+        console.error("URL verification failed:", error);
+        throw error;
+      }
+
+      return publicUrl;
+    } catch (error) {
+      console.error("Upload error:", error);
+      throw {
+        status: "UPLOAD_ERROR",
+        message: error.message || "Error uploading image",
+      };
+    }
+  },
+
   async createProject(project) {
     const auth = getAuth();
     const user = auth.currentUser;
@@ -26,19 +74,16 @@ export const projectServices = {
       const imageUrls = [];
       if (project.images && project.images.length > 0) {
         for (const image of project.images) {
-          const storageRef = ref(
-            storage,
-            `project-images/${Date.now()}-${image.name}`
-          );
           try {
-            const uploadResult = await uploadBytes(storageRef, image);
-            const imageUrl = await getDownloadURL(uploadResult.ref);
-            imageUrls.push(imageUrl);
+            const publicUrl = await this.uploadImage(image);
+            if (publicUrl) {
+              imageUrls.push(publicUrl);
+            }
           } catch (uploadError) {
             console.error("Error uploading image:", uploadError);
             throw {
-              status: uploadError.code || "UPLOAD_ERROR",
-              message: uploadError.message || "Error uploading image",
+              status: "UPLOAD_ERROR",
+              message: `Failed to upload image ${image.name}: ${uploadError.message}`,
             };
           }
         }
@@ -70,11 +115,14 @@ export const projectServices = {
             collection(db, "projects"),
             projectData
           );
+
           return {
             id: projectRef.id,
             ...projectData,
             start_date: projectData.start_date?.toDate(),
             end_date: projectData.end_date?.toDate(),
+            created_at: projectData.created_at.toDate(),
+            updated_at: projectData.updated_at.toDate(),
           };
         } catch (firestoreError) {
           console.error(

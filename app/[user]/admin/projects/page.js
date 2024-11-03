@@ -45,8 +45,8 @@ export default function Projects() {
   }
   return (
     <div>
-      <h1 className="text-3xl font-bold text-slate-900 mb-6">Projects</h1>
-      <Button asChild className="mb-6">
+      <h1 className="text-2xl font-bold text-slate-900 mb-6">Projects</h1>
+      <Button asChild className="mb-6" size="sm">
         <Link href={`/${user}/admin/projects/new`}>Create New Project</Link>
       </Button>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

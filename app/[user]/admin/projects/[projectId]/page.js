@@ -87,123 +87,133 @@ export default function ProjectDetails() {
   }
 
   return (
-    <div className="w-1/2">
-      <Button
-        onClick={() => router.push(`/${user}/admin/projects`)}
-        variant="outline"
-        className="mb-4"
-      >
-        Back to Projects
-      </Button>
-      <Card className="shadow-none">
-        <CardHeader>
-          <CardTitle className="text-3xl font-bold text-slate-900">
-            {project.title || "Untitled Project"}
-          </CardTitle>
-          <CardDescription>
-            <Badge>{project.status || "No Status"}</Badge>
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div>
-              <h3 className="text-lg font-semibold text-slate-900">
-                Description
-              </h3>
-              <p>{project.description || "No description available"}</p>
-            </div>
-            <Separator />
-            <div>
-              <h3 className="text-lg font-semibold text-slate-900">Client</h3>
-              <p>{project.client_name || "No client specified"}</p>
-            </div>
-            <Separator />
-            <div>
-              <h3 className="text-lg font-semibold text-slate-900">
-                Categories
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {project.technologies && project.technologies.length > 0 ? (
-                  project.technologies.map((tech, index) => (
-                    <Badge key={index} variant="secondary">
-                      {tech}
-                    </Badge>
-                  ))
-                ) : (
-                  <p>No categories specified</p>
-                )}
+    <div className="w-full">
+      <div className="flex flex-row gap-2">
+        <Button
+          onClick={() => router.push(`/${user}/admin/projects`)}
+          variant="outline"
+          size="sm"
+          className="mb-3"
+        >
+          Back to Projects
+        </Button>
+        <Button
+          onClick={() =>
+            router.push(`/${user}/admin/projects/${projectId}/edit`)
+          }
+          size="sm"
+        >
+          Save Project
+        </Button>
+        <Button variant="destructive" size="sm">
+          Delete Project
+        </Button>
+      </div>
+      <div className="w-full flex flex-row gap-4 h-[calc(100vh-150px)]">
+        <Card className="shadow-none w-1/2">
+          <CardHeader>
+            <CardTitle className="text-3xl font-bold text-slate-900">
+              {project.title || "Untitled Project"}
+            </CardTitle>
+            <CardDescription>
+              <Badge>{project.status || "No Status"}</Badge>
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-lg font-semibold text-slate-900">
+                  Description
+                </h3>
+                <p>{project.description || "No description available"}</p>
               </div>
-            </div>
-            <Separator />
-            <div>
-              <h3 className="text-lg font-semibold text-slate-900">Timeline</h3>
-              <p>
-                Start Date:{" "}
-                {project.start_date
-                  ? format(project.start_date, "MMMM d, yyyy")
-                  : "Not set"}
-              </p>
-              <p>
-                End Date:{" "}
-                {project.end_date
-                  ? format(project.end_date, "MMMM d, yyyy")
-                  : "Not set"}
-              </p>
-            </div>
-            {project.featured_image && imagesLoaded && (
-              <>
-                <Separator />
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900">
-                    Featured Image
-                  </h3>
-                  <img
-                    src={project.featured_image}
-                    alt="Featured project image"
-                    className="mt-2 rounded-md max-w-full h-auto"
-                  />
+              <Separator />
+              <div>
+                <h3 className="text-lg font-semibold text-slate-900">Client</h3>
+                <p>{project.client_name || "No client specified"}</p>
+              </div>
+              <Separator />
+              <div>
+                <h3 className="text-lg font-semibold text-slate-900">
+                  Categories
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies && project.technologies.length > 0 ? (
+                    project.technologies.map((tech, index) => (
+                      <Badge key={index} variant="secondary">
+                        {tech}
+                      </Badge>
+                    ))
+                  ) : (
+                    <p>No categories specified</p>
+                  )}
                 </div>
-              </>
-            )}
-            {project.gallery_images &&
-              project.gallery_images.length > 0 &&
-              imagesLoaded && (
+              </div>
+              <Separator />
+              <div>
+                <h3 className="text-lg font-semibold text-slate-900">
+                  Timeline
+                </h3>
+                <p>
+                  Start Date:{" "}
+                  {project.start_date
+                    ? format(project.start_date, "MMMM d, yyyy")
+                    : "Not set"}
+                </p>
+                <p>
+                  End Date:{" "}
+                  {project.end_date
+                    ? format(project.end_date, "MMMM d, yyyy")
+                    : "Not set"}
+                </p>
+              </div>
+              {project.featured_image && imagesLoaded && (
                 <>
                   <Separator />
                   <div>
                     <h3 className="text-lg font-semibold text-slate-900">
-                      Gallery
+                      Featured Image
                     </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
-                      {project.gallery_images.map((image, index) => (
-                        <div
-                          key={index}
-                          className="h-32 overflow-hidden rounded-lg"
-                        >
-                          <img
-                            src={image}
-                            alt={`Project image ${index + 1}`}
-                            className="h-full w-full object-cover rounded-lg"
-                          />
-                        </div>
-                      ))}
-                    </div>
+                    <img
+                      src={project.featured_image}
+                      alt="Featured project image"
+                      className="mt-2 rounded-md max-w-full h-auto"
+                    />
                   </div>
                 </>
               )}
-          </div>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button
-            onClick={() =>
-              router.push(`/${user}/admin/projects/${projectId}/edit`)
-            }
-          >
-            Edit Project
-          </Button>
-          <Button variant="destructive">Delete Project</Button>
-        </CardFooter>
-      </Card>
+            </div>
+          </CardContent>
+          <CardFooter className="flex justify-between"></CardFooter>
+        </Card>
+        <Card className="shadow-none w-1/2 overflow-y-scroll ">
+          <CardHeader className="sticky top-0 z-10 bg-white">
+            <CardTitle className="text-slate-900">File Galerries</CardTitle>
+          </CardHeader>
+          <CardContent className="z-0">
+            {project.gallery_images &&
+              project.gallery_images.length > 0 &&
+              imagesLoaded && (
+                <div>
+                  <div className="grid grid-cols-2  md:grid-cols-2 gap-4">
+                    {project.gallery_images.map((image, index) => (
+                      <div
+                        key={index}
+                        className="h-48 overflow-hidden rounded-lg border"
+                      >
+                        <img
+                          src={image}
+                          alt={`Project image ${index + 1}`}
+                          className="h-full w-full object-contain rounded-lg"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

@@ -120,13 +120,13 @@ export default function NewProject() {
   };
 
   return (
-    <div className="w-1/2">
-      <Card className="shadow-none">
+    <div className="w-full flex flex-row gap-4 h-[calc(100vh-100px)]">
+      <Card className="shadow-none w-1/2 ">
         <CardHeader>
           <CardTitle className="text-slate-900">Create New Project</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-2">
             <div>
               <Label htmlFor="title">Project Title</Label>
               <Input
@@ -211,44 +211,50 @@ export default function NewProject() {
                   <p className="text-red-500 text-sm mt-1">{errors.images}</p>
                 )}
               </div>
-
-              {values.images.length > 0 && (
-                <div className="mt-4 grid grid-cols-2 gap-4">
-                  {values.images.map((file, index) => (
-                    <div key={index} className="relative group">
-                      <img
-                        src={URL.createObjectURL(file)}
-                        alt={`Project image ${index + 1}`}
-                        className={`w-full h-48 object-cover rounded-md ${
-                          index === 0 ? "border-2 border-blue-500" : ""
-                        }`}
-                      />
-                      <div className="absolute top-2 right-2">
-                        <Button
-                          type="button"
-                          variant="destructive"
-                          size="icon"
-                          className="h-6 w-6"
-                          onClick={() => removeImage(index)}
-                        >
-                          <X className="h-4 w-4" />
-                        </Button>
-                      </div>
-                      {index === 0 && (
-                        <span className="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded-md text-xs">
-                          Featured
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
 
-            <Button type="submit" disabled={isSubmitting}>
+            <Button className="mt-4" type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Creating..." : "Create Project"}
             </Button>
           </form>
+        </CardContent>
+      </Card>
+      <Card className="shadow-none w-1/2 overflow-y-scroll ">
+        <CardHeader className="sticky top-0 z-10 bg-white">
+          <CardTitle className="text-slate-900">File Previews</CardTitle>
+        </CardHeader>
+        <CardContent className="z-0">
+          {values.images.length > 0 && (
+            <div className=" grid grid-cols-2 gap-4">
+              {values.images.map((file, index) => (
+                <div key={index} className="relative group">
+                  <img
+                    src={URL.createObjectURL(file)}
+                    alt={`Project image ${index + 1}`}
+                    className={`w-full h-48 object-contain rounded-md ${
+                      index === 0 ? "border-2 border-blue-500" : ""
+                    }`}
+                  />
+                  <div className="absolute top-2 right-2">
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      size="icon"
+                      className="h-6 w-6"
+                      onClick={() => removeImage(index)}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  {index === 0 && (
+                    <span className="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded-md text-xs">
+                      Featured
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

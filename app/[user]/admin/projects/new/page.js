@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useForm } from "@/hooks/use-form";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -53,6 +53,7 @@ const validate = (values) => {
 
 export default function NewProject() {
   const router = useRouter();
+  const { user } = useParams();
 
   const onSubmit = async (values) => {
     try {
@@ -69,7 +70,7 @@ export default function NewProject() {
 
       const result = await projectServices.createProject(projectData);
       console.log("Project created:", result);
-      router.push("/admin/projects");
+      router.push(`/${user}/admin/projects`);
     } catch (error) {
       console.error("Error creating project:", error);
     }

@@ -21,6 +21,7 @@ export function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const { user } = useParams();
 
@@ -31,9 +32,11 @@ export function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
     if (!email || !password) {
       setError("Please fill in all fields");
+      setLoading(false);
       return;
     }
 
@@ -43,6 +46,7 @@ export function LoginForm() {
       router.push(`/${user}/admin`);
     } catch (error) {
       setError(error.message);
+      setLoading(false);
     }
   };
 
@@ -88,8 +92,12 @@ export function LoginForm() {
             />
           </div>
           {error && <p className="text-sm text-red-500">{error}</p>}
-          <Button type="submit" className="w-full">
-            Login
+          <Button
+            disabled={!isValidEmail(email) || !password || loading}
+            type="submit"
+            className="w-full"
+          >
+            {loading ? "Loading..." : "Login"}
           </Button>
         </form>
       </CardContent>

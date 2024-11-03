@@ -1,45 +1,73 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { EnvelopeOpenIcon } from "@radix-ui/react-icons";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 
 function Profile() {
   return (
-    <div className="w-[100%] flex flex-col items-center min-h-[83vh]">
-      <h1 className="text-xl text-black md:text-3xl">Profile</h1>
-      <Card className="w-[50%] mt-4 flex flex-col items-center text-justify rounded-2xl">
-        <CardHeader className="w-[100%] flex flex-col items-center">
-          <Avatar className="w-24 h-24">
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <CardTitle className="text-black">John Doe</CardTitle>
-          <CardDescription className="text-black">Admin</CardDescription>
-          <CardDescription>
-            {" "}
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut
-            purus rhoncus erat rhoncus consectetur. Aliquam tincidunt mi sed
-            quam tincidunt, vel tempus risus gravida. In semper, est feugiat
-            condimentum euismod, ligula mi viverra nulla, eu tempus libero lorem
-            ut diam. Donec a lobortis nisi. Duis a porttitor odio, id molestie
-            enim. Aliquam mollis mi maximus odio faucibus imperdiet.{" "}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Button>
-            <EnvelopeOpenIcon /> Example@mail.com
+    <div className="w-[70%] flex gap-7 flex-col min-h-[83vh] ">
+      <div className="flex flex-col">
+        <h1 className="text-sm text-black md:text-xl">Profile</h1>
+        <h3 className="text-xs text-black md:text-sm">
+          This is how others will see you on this site.
+        </h3>
+      </div>
+      <form className="flex flex-col gap-7">
+        {/* Username */}
+        <div className="flex flex-col gap-2 ">
+          <h1 className="text-sm text-black md:text-xl">Username</h1>
+          <Input type="Text" placeholder="shadcn" />
+          <h3 className="text-xs text-black md:text-sm">
+            This is your public display name. It can be your real name or a
+            pseudonym. You can change this once every 30 days.
+          </h3>
+        </div>
+        {/* Email */}
+        <div className="flex flex-col gap-2 ">
+          <h1 className="text-sm text-black md:text-xl">Email</h1>
+          <Select>
+            <SelectTrigger className="w-[100%]">
+              <SelectValue placeholder="Select a verified email to display" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="light">Biji@mail.com</SelectItem>
+              <SelectItem value="dark">Biji@mail.com</SelectItem>
+              <SelectItem value="system">Biji@mail.com</SelectItem>
+            </SelectContent>
+          </Select>
+          <h3 className="text-xs text-black md:text-sm">
+            You can manage verified email addresses in your email settings.
+          </h3>
+        </div>
+        {/* Bio */}
+        <div className="flex flex-col gap-2 ">
+          <h1 className="text-sm text-black md:text-xl">Bio</h1>
+          <Textarea placeholder="I Own a Computer." />
+          <h3 className="text-xs text-black md:text-sm">
+            You can @mention other users and organizations to link to them.
+          </h3>
+        </div>
+        {/* URLs */}
+        <div className="flex flex-col gap-2 ">
+          <h1 className="text-sm text-black md:text-xl">URLs</h1>
+          <h3 className="text-xs text-black md:text-sm">
+            Add links to your website, blog, or social media profiles.
+          </h3>
+          <Input type="Text" placeholder="Add Your URL here" />
+          <Input type="Text" placeholder="Add Your URL here" />
+          <Button variant="outline" className="w-[6rem]">
+            Add URL
           </Button>
-        </CardContent>
-        <CardFooter></CardFooter>
-      </Card>
+        </div>
+        <Button className="w-[8rem]">Update Profile</Button>
+      </form>
     </div>
   );
 }

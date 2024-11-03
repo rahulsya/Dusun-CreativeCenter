@@ -213,7 +213,7 @@ label {
   cursor: pointer;
   font-weight: 500;
   margin-bottom: 5px;
-  color: var(--base-color);
+  color: var(--black-color);
 }
 
 .form-group {
@@ -4303,8 +4303,10 @@ h6,
   display: none;
   padding: 20px 0;
   background: var(--lighter-color);
-  -webkit-box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.15), -2px 0px 5px 1px rgba(0, 0, 0, 0.15);
-  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.15), -2px 0px 5px 1px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.15),
+    -2px 0px 5px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.15),
+    -2px 0px 5px 1px rgba(0, 0, 0, 0.15);
 }
 .main-menu .navbar-collapse li .megamenu:after {
   display: block;
@@ -4341,8 +4343,10 @@ h6,
   z-index: 100;
   display: none;
   background: var(--lighter-color);
-  -webkit-box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.15), -2px 0px 5px 1px rgba(0, 0, 0, 0.15);
-  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.15), -2px 0px 5px 1px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.15),
+    -2px 0px 5px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.15),
+    -2px 0px 5px 1px rgba(0, 0, 0, 0.15);
 }
 @media only screen and (max-width: 991px) {
   .main-menu .navbar-collapse li ul {
@@ -5002,9 +5006,21 @@ h6,
   border-radius: 60px;
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
-  background: -webkit-linear-gradient(356deg, rgba(49, 50, 52, 0.61) 46.62%, rgba(88, 77, 77, 0.61) 115.88%);
-  background: -o-linear-gradient(356deg, rgba(49, 50, 52, 0.61) 46.62%, rgba(88, 77, 77, 0.61) 115.88%);
-  background: linear-gradient(94deg, rgba(49, 50, 52, 0.61) 46.62%, rgba(88, 77, 77, 0.61) 115.88%);
+  background: -webkit-linear-gradient(
+    356deg,
+    rgba(49, 50, 52, 0.61) 46.62%,
+    rgba(88, 77, 77, 0.61) 115.88%
+  );
+  background: -o-linear-gradient(
+    356deg,
+    rgba(49, 50, 52, 0.61) 46.62%,
+    rgba(88, 77, 77, 0.61) 115.88%
+  );
+  background: linear-gradient(
+    94deg,
+    rgba(49, 50, 52, 0.61) 46.62%,
+    rgba(88, 77, 77, 0.61) 115.88%
+  );
 }
 @media only screen and (max-width: 991px) {
   .hero-two-content .designations {
@@ -6498,8 +6514,18 @@ h6,
   max-height: 100%;
   width: 100%;
   height: 250px;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(201, 243, 29, 0)), to(#c9f31d));
-  background: -webkit-linear-gradient(top, rgba(201, 243, 29, 0) 0%, #c9f31d 100%);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(201, 243, 29, 0)),
+    to(#c9f31d)
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(201, 243, 29, 0) 0%,
+    #c9f31d 100%
+  );
   background: -o-linear-gradient(top, rgba(201, 243, 29, 0) 0%, #c9f31d 100%);
   background: linear-gradient(180deg, rgba(201, 243, 29, 0) 0%, #c9f31d 100%);
 }

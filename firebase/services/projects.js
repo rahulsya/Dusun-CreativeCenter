@@ -1,4 +1,11 @@
-import { collection, getDocs, addDoc, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  doc,
+  addDoc,
+  Timestamp,
+  getDoc,
+} from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "@/firebase/config";
 import { getAuth } from "firebase/auth";
@@ -124,6 +131,45 @@ export const projectServices = {
       throw {
         status: error.code || "FETCH_ERROR",
         message: error.message || "Error fetching projects",
+      };
+    }
+  },
+
+  async getProjectById(projectId) {
+    try {
+      const docRef = doc(db, "projects", projectId);
+      const docSnap = await getDoc(docRef);
+
+      if (!docSnap.exists()) {
+        throw new Error("Project not found");
+      }
+
+      const data = docSnap.data();
+
+      const toDateSafe = (dateField) =>
+        dateField?.toDate ? dateField.toDate() : null;
+
+      const projectData = {
+        id: docSnap.id,
+        ...data,
+        start_date: toDateSafe(data.start_date),
+        end_date: toDateSafe(data.end_date),
+        created_at: toDateSafe(data.created_at),
+        updated_at: toDateSafe(data.updated_at),
+        technologies: Array.isArray(data.technologies) ? data.technologies : [],
+      };
+
+      return projectData;
+    } catch (error) {
+      console.error("Error getting project:", error);
+
+      if (error.code === "not-found") {
+        throw { status: "NOT_FOUND", message: "Project not found" };
+      }
+
+      throw {
+        status: "FETCH_ERROR",
+        message: error.message || "Error fetching project",
       };
     }
   },

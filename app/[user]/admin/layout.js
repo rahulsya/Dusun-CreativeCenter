@@ -19,6 +19,7 @@ import { AuthContextProvider, useAuthContext } from "@/context/authContext";
 import Preloader from "@/layout/Preloader";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import LoginDirect from "@/components/alerts/LoginDirect";
 
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
@@ -41,7 +42,13 @@ export default function AdminLayout({ children }) {
   }
 
   if (!authLoading && user == null) {
-    return <div>Please Login first...</div>;
+    // return <div>Please Login first...</div>;
+    // return alert("Please Login first...");
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <LoginDirect />
+      </div>
+    );
   }
 
   return (
@@ -51,7 +58,7 @@ export default function AdminLayout({ children }) {
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
-            <Separator orientation="vertical" className="mr-2 h-4" />
+            <Separator orientation="vertical" className="h-4 mr-2" />
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">

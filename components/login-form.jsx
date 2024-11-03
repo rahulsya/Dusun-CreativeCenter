@@ -24,6 +24,10 @@ export function LoginForm() {
 
   const { user } = useParams();
 
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -43,7 +47,7 @@ export function LoginForm() {
   };
 
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="max-w-sm mx-auto">
       <CardHeader>
         <CardTitle className="text-2xl text-gray-800">Login</CardTitle>
         <CardDescription>
@@ -62,11 +66,16 @@ export function LoginForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            {!isValidEmail(email) && (
+              <h1 className="text-xs text-red-800 md:text-sm">
+                Please login with email format
+              </h1>
+            )}
           </div>
           <div className="grid gap-2">
             <div className="flex items-center">
               <Label htmlFor="password">Password</Label>
-              <Link href="#" className="ml-auto inline-block text-sm underline">
+              <Link href="#" className="inline-block ml-auto text-sm underline">
                 Forgot your password?
               </Link>
             </div>
@@ -78,7 +87,7 @@ export function LoginForm() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {error && <p className="text-sm text-red-500">{error}</p>}
           <Button type="submit" className="w-full">
             Login
           </Button>

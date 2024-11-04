@@ -177,7 +177,7 @@ export default function ProjectDetails() {
                     <img
                       src={project.featured_image}
                       alt="Featured project image"
-                      className="mt-2 rounded-md max-w-full h-auto"
+                      className="mt-2 rounded-md max-w-full h-48"
                     />
                   </div>
                 </>

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useForm } from "@/hooks/use-form";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { DatePicker } from "@/components/ui/date-picker";
 import { projectServices } from "@/firebase/services/projects";
-import { X } from "lucide-react";
+import { UploadCloud, X } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const initialValues = {
   title: "",
@@ -54,6 +60,37 @@ const validate = (values) => {
 export default function NewProject() {
   const router = useRouter();
   const { user } = useParams();
+  const [isDragActive, setIsDragActive] = useState(false);
+  const [files, setFiles] = useState([]);
+  const fileInputRef = useRef(null);
+
+  const handleDrag = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setIsDragActive(true);
+    } else if (e.type === "dragleave") {
+      setIsDragActive(false);
+    }
+  }, []);
+
+  const handleDrop = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragActive(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFiles(e.dataTransfer.files);
+    }
+  }, []);
+
+  const handleFiles = (selectedFiles) => {
+    setFiles(Array.from(selectedFiles));
+    handleImageChange({ target: { files: selectedFiles } });
+  };
+
+  const onButtonClick = () => {
+    fileInputRef.current.click();
+  };
 
   const onSubmit = async (values) => {
     try {
@@ -197,6 +234,45 @@ export default function NewProject() {
             </div>
 
             <div>
+              <Label htmlFor="file-upload">Select File</Label>
+              <div
+                onDragEnter={handleDrag}
+                onDragLeave={handleDrag}
+                onDragOver={handleDrag}
+                onDrop={handleDrop}
+                onClick={onButtonClick}
+                className={`border-2 border-dashed rounded-lg p-6 flex flex-col items-center space-y-2 mt-1 ${
+                  isDragActive
+                    ? "border-blue-500 bg-blue-50"
+                    : "border-gray-300"
+                }`}
+              >
+                <UploadCloud
+                  className={`w-12 h-12 ${
+                    isDragActive ? "text-blue-500" : "text-gray-400"
+                  }`}
+                />
+                <Label className="cursor-pointer text-blue-600 hover:underline">
+                  {isDragActive
+                    ? "Drop the files here"
+                    : "Click to upload or drag and drop"}
+                </Label>
+                <span className="text-xs text-gray-500">
+                  SVG, PNG, JPG or GIF
+                </span>
+                <input
+                  ref={fileInputRef}
+                  name="images"
+                  type="file"
+                  id="file-upload"
+                  multiple
+                  className="hidden"
+                  onChange={(e) => handleFiles(e.target.files)}
+                />
+              </div>
+            </div>
+
+            {/* <div>
               <Label htmlFor="images">Project Images</Label>
               <div className="mt-1">
                 <Input
@@ -211,7 +287,7 @@ export default function NewProject() {
                   <p className="text-red-500 text-sm mt-1">{errors.images}</p>
                 )}
               </div>
-            </div>
+            </div> */}
 
             <Button className="mt-4" type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Creating..." : "Create Project"}
@@ -228,13 +304,24 @@ export default function NewProject() {
             <div className=" grid grid-cols-2 gap-4">
               {values.images.map((file, index) => (
                 <div key={index} className="relative group">
-                  <img
-                    src={URL.createObjectURL(file)}
-                    alt={`Project image ${index + 1}`}
-                    className={`w-full h-48 object-contain rounded-md ${
-                      index === 0 ? "border-2 border-blue-500" : ""
-                    }`}
-                  />
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="w-full h-48">
+                          <img
+                            src={URL.createObjectURL(file)}
+                            alt={`Project image ${index + 1}`}
+                            className={`w-full h-full object-contain rounded-md ${
+                              index === 0 ? "border-2 border-blue-500" : ""
+                            }`}
+                          />
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{file.name}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                   <div className="absolute top-2 right-2">
                     <Button
                       type="button"

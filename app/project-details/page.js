@@ -11,7 +11,7 @@ const ProjectDetails = () => {
     <NoxfolioLayout>
       <PageBanner pageName={"Mobile Application Design"} />
       {/* ProjectDetails Area start */}
-      <section className="projects-details-area pt-40 pb-130 rpb-100 rel z-1">
+      <section className="pt-40 projects-details-area pb-130 rpb-100 rel z-1">
         <div className="container">
           <div className="projects-details-image mb-50 wow fadeInUp delay-0-2s">
             <img
@@ -39,7 +39,7 @@ const ProjectDetails = () => {
                   exercitationem ullam corporis suscipit laboriosam, nisi ut
                   aliquid consequature
                 </p>
-                <ul className="list-style-one two-column mt-50 mb-40">
+                <ul className="mb-40 list-style-one two-column mt-50">
                   <li>Branding &amp; Design</li>
                   <li>Digital Marketing</li>
                   <li>Web Development</li>
@@ -174,7 +174,7 @@ const ProjectDetails = () => {
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-xl-12">
-              <div className="section-title text-center mb-60 wow fadeInUp delay-0-2s">
+              <div className="text-center section-title mb-60 wow fadeInUp delay-0-2s">
                 <h2>Related Projects</h2>
               </div>
             </div>

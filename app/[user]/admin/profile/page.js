@@ -1,13 +1,6 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 
 function Profile() {
@@ -32,16 +25,7 @@ function Profile() {
         {/* Email */}
         <div className="flex flex-col gap-2 ">
           <h1 className="text-sm text-black md:text-xl">Email</h1>
-          <Select>
-            <SelectTrigger className="w-[100%]">
-              <SelectValue placeholder="Select a verified email to display" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="light">Biji@mail.com</SelectItem>
-              <SelectItem value="dark">Biji@mail.com</SelectItem>
-              <SelectItem value="system">Biji@mail.com</SelectItem>
-            </SelectContent>
-          </Select>
+          <Input type="Text" placeholder="example@mail.com" />
           <h3 className="text-xs text-black md:text-sm">
             You can manage verified email addresses in your email settings.
           </h3>

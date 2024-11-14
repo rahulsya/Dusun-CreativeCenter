@@ -1,23 +1,20 @@
 "use client";
 
-import { useEffect, useEffet, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
 function Profile() {
-  const [urls, setUrls] = useState([]);
-  const [data, setData] = useState([
-    {
-      id: null,
-      username: "",
-      email: "",
-      bio: "",
-      urls: urls,
-    },
-  ]);
+  const [data, setData] = useState({
+    id: null,
+    username: "",
+    email: "",
+    bio: "",
+    urls: [],
+  });
   const [loading, setLoading] = useState(true);
 
   const handleUsername = (e) => {
@@ -32,8 +29,10 @@ function Profile() {
     setData((prev) => ({ ...prev, bio: e.target.value }));
   };
 
-  const handleUrls = (e) => {
-    setData((prev) => ({ ...prev, urls: e.target.value }));
+  const handleUrls = (index, value) => {
+    const updatedUrls = [...data.urls];
+    updatedUrls[index] = value;
+    setData((prev) => ({ ...prev, urls: updatedUrls }));
   };
 
   const fetchdata = async () => {
@@ -42,21 +41,16 @@ function Profile() {
       const data = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-      }));
-      console.log(data[0]);
+      }))[0];
 
-      console.log(data[0].urls.map((url) => url));
-      console.log(typeof data[0].urls);
-
-      setData([
-        {
-          id: data[0].id,
-          username: data[0].username,
-          email: data[0].email,
-          bio: data[0].bio,
-          urls: data[0].urls.map((url) => url),
-        },
-      ]);
+      setData({
+        id: data.id,
+        username: data.username || "",
+        email: data.email || "",
+        bio: data.bio || "",
+        urls: data.urls || [],
+      });
+      console.log(data);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -70,6 +64,29 @@ function Profile() {
     fetchdata();
   }, []);
 
+  const handleUpdateProfile = async () => {
+    const userDocRef = doc(db, "profile", data.id);
+
+    const updateData = {};
+    if (data.username) updateData.username = data.username;
+    if (data.email) updateData.email = data.email;
+    if (data.bio) updateData.bio = data.bio;
+    if (data.urls) updateData.urls = data.urls;
+
+    try {
+      await updateDoc(userDocRef, updateData);
+      alert("Profile updated successfully");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
+
+  const handleDeleteUrl = (index) => {
+    const updatedUrls = [...data.urls];
+    updatedUrls.splice(index, 1);
+    setData((prev) => ({ ...prev, urls: updatedUrls }));
+  };
+
   if (loading) return <p>Loading...</p>;
 
   return (
@@ -80,15 +97,18 @@ function Profile() {
           This is how others will see you on this site.
         </h3>
       </div>
-      <form className="flex flex-col gap-7">
+      <form
+        className="flex flex-col gap-7"
+        onSubmit={(e) => e.preventDefault()}
+      >
         {/* Username */}
         <div className="flex flex-col gap-2 ">
           <h1 className="text-sm text-black md:text-xl">Username</h1>
           <Input
             type="Text"
             placeholder="shadcn"
+            value={data.username || ""}
             onChange={handleUsername}
-            value={data[0].username}
           />
           <h3 className="text-xs text-black md:text-sm">
             This is your public display name. It can be your real name or a
@@ -102,7 +122,7 @@ function Profile() {
             type="Text"
             placeholder="example@mail.com"
             onChange={handleEmail}
-            value={data[0].email}
+            value={data.email || ""}
           />
           <h3 className="text-xs text-black md:text-sm">
             You can manage verified email addresses in your email settings.
@@ -113,8 +133,8 @@ function Profile() {
           <h1 className="text-sm text-black md:text-xl">Bio</h1>
           <Textarea
             placeholder="I Own a Computer."
+            value={data.bio}
             onChange={handleBio}
-            value={data[0].bio}
           />
           <h3 className="text-xs text-black md:text-sm">
             You can @mention other users and organizations to link to them.
@@ -123,16 +143,36 @@ function Profile() {
         {/* URLs */}
         <div className="flex flex-col gap-2 ">
           <h1 className="text-sm text-black md:text-xl">URLs</h1>
-          <h3 className="text-xs text-black md:text-sm">
-            Add links to your website, blog, or social media profiles.
-          </h3>
-          <Input type="Text" placeholder="Add Your URL here" />
-          <Input type="Text" placeholder="Add Your URL here" />
-          <Button variant="outline" className="w-[6rem]">
+          {data.urls.map((url, index) => (
+            <div key={index} className="flex gap-2">
+              <Input
+                type="text"
+                placeholder="Add Your URL here"
+                value={url}
+                onChange={(e) => handleUrls(index, e.target.value)}
+              />
+              <Button
+                variant="outline"
+                className="w-[2rem] hover:bg-red-600 hover:text-white"
+                onClick={() => handleDeleteUrl(index)}
+              >
+                X
+              </Button>
+            </div>
+          ))}
+          <Button
+            variant="outline"
+            className="w-[6rem]"
+            onClick={() =>
+              setData((prev) => ({ ...prev, urls: [...prev.urls, ""] }))
+            }
+          >
             Add URL
           </Button>
         </div>
-        <Button className="w-[8rem]">Update Profile</Button>
+        <Button className="w-[8rem]" onClick={handleUpdateProfile}>
+          Update Profile
+        </Button>
       </form>
     </div>
   );
